@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Talent Matching API Route Rule
+
+## Overview
+The main API endpoint for talent matching is [`src/app/api/talent-matching/route.ts`](mdc:src/app/api/talent-matching/route.ts). It powers the AI-driven candidate search and ranking for the platform.
+
+## How It Works
+- **Endpoint:** `POST /api/talent-matching`
+- **Input:** JSON body with job description and filter criteria (skills, location, experience, salary, job types, etc.)
+- **Filtering:**
+  - Uses Supabase SQL queries for efficient server-side filtering (skills, location, experience, salary, verification, etc.).
+  - Applies additional array-based and complex filters in TypeScript after the initial query (job types, desired roles, industries, education, remote preference).
+- **Ranking:**
+  - If Cohere API is available, ranks candidates by semantic similarity between the job description and candidate profiles using embeddings and cosine similarity.
+  - If Cohere is unavailable, falls back to ranking by `profile_strength`.
+- **Metrics:**
+  - Computes Precision@N and NDCG (Normalized Discounted Cumulative Gain) for the returned candidates.
+- **Output:**
+  - Returns a JSON object with ranked candidates, metrics, and a brief analysis string.
+
+## Key Files
+- [API Route](mdc:src/app/api/talent-matching/route.ts): Implements the endpoint, filtering, ranking, and metrics logic.
+- [Supabase Client](mdc:src/lib/supabase.ts): Used for database queries.
+- [Supabase Types](mdc:src/types/supabase.ts): Defines the `talents` table schema and types.
+- [Frontend Service](mdc:src/services/talent-matching.ts): Calls the API from the frontend.
+
+## Example Usage
+- The frontend (see [`src/app/page.tsx`](mdc:src/app/page.tsx)) sends a POST request to `/api/talent-matching` with the job description and filters.
+- The API returns ranked candidates and metrics, which are displayed to the user.
+
+## Schema Reference
+See [`src/types/supabase.ts`](mdc:src/types/supabase.ts) for the full `talents` table schema used in filtering and ranking.
+

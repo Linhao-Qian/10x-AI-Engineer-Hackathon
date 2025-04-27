@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Supabase Schema Rule
+
+## Overview
+The Supabase database schema is defined in [`src/types/supabase.ts`](mdc:src/types/supabase.ts). The main table for talent matching is `talents`.
+
+## Talents Table
+- **Fields:**
+  - `id`, `full_name`, `email`, `location`, `headline`, `summary`, `years_of_experience`, `current_title`, `current_company`
+  - `skills` (string[]): Array of skills for flexible filtering and matching
+  - `industries` (string[]): Candidate's industries
+  - `seniority_level`: Experience level (junior, mid, senior, etc.)
+  - `education` (Json[]): Array of education objects (degree, year, school)
+  - `work_experience` (Json[]): Array of work experience objects
+  - `achievements` (string[]): List of achievements
+  - `remote_preference`: Remote/hybrid/onsite
+  - `job_types` (string[]): Preferred job types
+  - `desired_roles` (string[]): Desired roles
+  - `desired_industries` (string[]): Desired industries
+  - `salary_expectation_range` (Json): Object with min, max, and currency
+  - `profile_strength` (number): Quantifies profile completeness/quality
+  - `is_verified` (boolean): Profile verification status
+  - `last_active`: Last active timestamp
+  - Social links: `linkedin_url`, `github_url`, `portfolio_url`
+
+## Design Rationale
+- Uses arrays and JSONB fields for flexibility and future-proofing
+- Supports both structured SQL filtering and unstructured semantic search
+- Schema is designed for extensibility, query performance, and real-world expressiveness
+
+## Reference
+See [`src/types/supabase.ts`](mdc:src/types/supabase.ts) for the full schema definition.
+

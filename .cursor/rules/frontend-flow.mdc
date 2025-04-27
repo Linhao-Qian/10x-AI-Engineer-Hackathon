@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Flow Rule
+
+## Overview
+The main frontend logic is implemented in [`src/app/page.tsx`](mdc:src/app/page.tsx). It provides the user interface for job-candidate matching and live feedback.
+
+## User Flow
+1. **User Input:**
+   - User enters a job description and selects filter criteria (skills, location, experience, salary, etc.).
+2. **API Call:**
+   - The frontend uses [`TalentMatchingService`](mdc:src/services/talent-matching.ts) to send a POST request to the API with the job description and filters.
+3. **Results Display:**
+   - The UI displays ranked candidates, match scores, and a brief analysis.
+   - Users can provide feedback (relevant/not relevant) for each candidate.
+4. **Live Metrics:**
+   - Precision@N and NDCG metrics are computed and displayed live based on user feedback.
+
+## Key Files
+- [Main Page](mdc:src/app/page.tsx): Implements the UI, handles user input, displays results and metrics.
+- [Frontend Service](mdc:src/services/talent-matching.ts): Handles API requests and error handling.
+
+## Styling
+- Global styles are defined in [`globals.css`](mdc:src/app/globals.css).
+- Layout and fonts are set in [`layout.tsx`](mdc:src/app/layout.tsx).
+
