@@ -4,6 +4,8 @@
 
 This project is a full-stack, AI-powered talent-matching platform built for the "10x AI Engineer Hackathon". It leverages Next.js for the web app, Supabase for the database, and Cohere's embed-english-v3.0 model for semantic job-candidate matching. The project was developed using advanced AI tools: **Cursor** and **Claude 3.7**.
 
+This project has been deployed on Vercel. Please visit https://10x-ai-engineer-hackathon.vercel.app/ to check the live demo.
+
 ---
 
 ## Project Structure

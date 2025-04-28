@@ -483,39 +483,44 @@ export default function Home() {
           <div>
             {result && result.candidates && (
               <div className="bg-white rounded-lg shadow divide-y divide-gray-200">
-                <div className="p-6">
-                  <h2 className="text-lg font-medium text-gray-900 mb-4">
-                    Matching Results
-                  </h2>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex space-x-4">
-                      <div className="text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          Precision@{Object.keys(feedback).length || result?.candidates?.length || 0}:
-                        </span>{' '}
+                <div className="p-6 pb-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Matching Results
+                    </h2>
+                    <div className="flex space-x-2">
+                      <div className="flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-100" title="Precision@N: Percentage of relevant candidates among those you labeled.">
+                        <span className="mr-1">🎯</span>
+                        Precision@{Object.keys(feedback).length || result?.candidates?.length || 0}:&nbsp;
                         {feedback && result?.candidates && result.candidates.length > 0 && Object.keys(feedback).length > 0
-                          ? `${(calculateMetrics(result.candidates, feedback).precision !== null ? ((calculateMetrics(result.candidates, feedback).precision || 0) * 100).toFixed(2) : 'N/A')}%`
+                          ? `${
+                              calculateMetrics(result.candidates, feedback).precision !== null
+                                ? (((calculateMetrics(result.candidates, feedback).precision || 0) * 100).toFixed(2))
+                                : 'N/A'
+                            }%`
                           : 'Awaiting feedback'}
                       </div>
-                      <div className="text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          NDCG:
-                        </span>{' '}
+                      <div className="flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-800 border border-green-100" title="NDCG: Ranking quality of the results based on your feedback.">
+                        <span className="mr-1">📈</span>
+                        NDCG:&nbsp;
                         {feedback && result?.candidates && result.candidates.length > 0 && Object.keys(feedback).length > 0
-                          ? `${(calculateMetrics(result.candidates, feedback).ndcg !== null ? ((calculateMetrics(result.candidates, feedback).ndcg || 0) * 100).toFixed(2) : 'N/A')}%`
+                          ? `${
+                              calculateMetrics(result.candidates, feedback).ndcg !== null
+                                ? (((calculateMetrics(result.candidates, feedback).ndcg || 0) * 100).toFixed(2))
+                                : 'N/A'
+                            }%`
                           : 'Awaiting feedback'}
                       </div>
                     </div>
                   </div>
-
                   {result.analysis && (
-                    <div className="prose max-w-none">
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">Analysis</h3>
-                      <p className="text-gray-600 whitespace-pre-line">{result.analysis}</p>
+                    <div className="mt-4">
+                      <div className="bg-gray-50 border border-gray-200 rounded px-4 py-3 text-gray-700 whitespace-pre-line">
+                        {result.analysis}
+                      </div>
                     </div>
                   )}
                 </div>
-
                 <div className="divide-y divide-gray-200">
                   {result.candidates.map((candidate) => (
                     <div key={candidate.id} className="p-6">
